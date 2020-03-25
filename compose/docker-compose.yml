@@ -1,0 +1,51 @@
+version: '3.1'
+
+services:
+  arcgis-api:
+    image: cr.io/nginx:mainline-alpine
+    container_name: arcgis-api
+    networks:
+      - arcgis-network
+    ports:
+      - 8080:8080
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      # - arcgis-latest
+      - arcgis-fonts
+      - arcgis-414
+
+  arcgis-fonts:
+    image: cr.io/arcgis-fonts
+    container_name: arcgis-fonts
+    ports:
+      - 8400:8400
+    networks:
+      - arcgis-network
+
+  # Uncomment block below to use local build
+  # arcgis-latest:
+  #   build:
+  #     context: ../
+  #   image: arcgis-api:latest
+  #   container_name: arcgis-latest
+  #   networks:
+  #     - arcgis-network
+  #   environment:
+  #     - HOST=http://localhost:8080/latest
+  #   ports:
+  #     - 8401:8401
+
+  arcgis-414:
+    image: cr.io/arcgis-api:4.14
+    container_name: arcgis-414
+    networks:
+      - arcgis-network
+    environment:
+      - HOST=http://localhost:8080/4.14
+    ports:
+      - 8414:8414
+
+networks:
+  arcgis-network:
+    driver: bridge
