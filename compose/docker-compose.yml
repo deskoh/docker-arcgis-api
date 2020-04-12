@@ -14,6 +14,7 @@ services:
       # - arcgis-latest
       - arcgis-fonts
       - arcgis-414
+      - arcgis-415
 
   arcgis-fonts:
     image: cr.io/arcgis-fonts
@@ -43,6 +44,16 @@ services:
       - arcgis-network
     environment:
       - HOST=http://localhost:8080/4.14
+    ports:
+      - 8414:8414
+
+  arcgis-415:
+    image: cr.io/arcgis-api:4.15
+    container_name: arcgis-415
+    networks:
+      - arcgis-network
+    environment:
+      - HOST=http://localhost:8080/4.15
     ports:
       - 8414:8414
 

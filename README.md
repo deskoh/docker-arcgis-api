@@ -10,7 +10,7 @@ Docker image for self-hosting ArcGIS API for JavaScript.
 # Download and extract ArcGIS API into current folder
 
 # Build image
-docker build --build-arg ARCGIS_JS_ROOT=arcgis_js_v414_api/arcgis_js_api/library/4.14 . -t arcgis-api
+docker build --build-arg ARCGIS_JS_ROOT=arcgis_js_v415_api/arcgis_js_api/library/4.15 . -t arcgis-api:4.15
 
 # ArcGIS API available at http://localhost:8080/
 docker run --rm -it -e HOST=http://localhost:8080/ -p 8080:80 arcgis-api
@@ -19,6 +19,8 @@ docker run --rm -it -e HOST=http://localhost:8080/ -p 8080:80 arcgis-api
 ## Recipes for Hosting Multiple API Versions
 
 ### Docker Compose
+
+Hosts API at `http://localhost:8080/4.XX`
 
 ```sh
 # Start containers (in detached mode)
